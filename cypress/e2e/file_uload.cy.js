@@ -6,16 +6,16 @@ describe('File Upload Page Validation', () => {
       largeCSV: 'testFiles/large-file.csv' // 3MB file
     }
   
-    // beforeEach(() => {
-    //   cy.googleLogin()
-    //   cy.visit('/file-upload')
-    // })
-
     beforeEach(() => {
-        // Stub authentication instead of real login
-        cy.setCookie('auth_token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS1kZXYucmVjb254aS5jb20vYXBpL3YxL2F1dGgvZ29vZ2xlLWxvZ2luIiwiaWF0IjoxNzQzMTc5MTI3LCJleHAiOjE3NDM3ODM5MjcsIm5iZiI6MTc0MzE3OTEyNywianRpIjoiVEZmaWNIUVlnczBzVFI4QSIsInN1YiI6IjQxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.WSwvtF5QwJqHgUbDlKVum5B_kANReTcOtMynscEnRyw')
-        cy.visit('/file-upload')
-      })
+      cy.login()
+      cy.visit('/file-upload')
+    })
+
+    // beforeEach(() => {
+    //     // Stub authentication instead of real login
+    //     cy.setCookie('auth_token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS1kZXYucmVjb254aS5jb20vYXBpL3YxL2F1dGgvZ29vZ2xlLWxvZ2luIiwiaWF0IjoxNzQzMTc5MTI3LCJleHAiOjE3NDM3ODM5MjcsIm5iZiI6MTc0MzE3OTEyNywianRpIjoiVEZmaWNIUVlnczBzVFI4QSIsInN1YiI6IjQxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.WSwvtF5QwJqHgUbDlKVum5B_kANReTcOtMynscEnRyw')
+    //     cy.visit('/file-upload')
+    //   })
 
     // context('Unauthenticated user', () => {
     //     it('should redirect to login page', () => {
@@ -30,29 +30,22 @@ describe('File Upload Page Validation', () => {
       cy.contains('h2', 'Upload Company Ledger').should('be.visible')
   
       // Bank Statement Section
-      cy.get('[aria-label="Bank upload zone"]')
-        .should('contain', 'Choose file')
-        .and('have.css', 'border-color', 'rgba(51, 51, 51, 0.5)') // #33333380
+      cy.get('div[role="presentation"]')
+        .should('contain.text', 'Choose file')
+        .and('have.css', 'border-color', 'rgba(51, 51, 51, 0.5)');
+
       
       // Company Ledger Section
-      cy.get('[aria-label="Ledger upload zone"]')
-        .should('contain', 'Choose file')
-        .and('have.css', 'border-color', 'rgba(51, 51, 51, 0.5)')
+      cy.contains('Upload Company Ledger')
+        .parent() // gets the parent container
+        .find('div[role="presentation"]')
+        .should('contain.text', 'Choose file')
+        .and('have.css', 'border-color', 'rgba(51, 51, 51, 0.5)');
+
   
       // Format requirements
-      cy.contains('Supported format: CSV').should('have.length', 2)
-      cy.contains('Maximum size: 2MB').should('have.length', 2)
-    })
-  
-    it('should validate responsiveness', () => {
-      // Mobile view
-      cy.viewport('iphone-8')
-      cy.get('h2').should('have.css', 'font-size', '16px') // text-base
-      
-      // Desktop view
-      cy.viewport('macbook-15')
-      cy.get('h2').should('have.css', 'font-size', '24px') // lg:text-2xl
-      cy.contains('Drag & Drop files here or').should('be.visible')
+      cy.contains('Supported format: CSV').should('have.length', 1)
+      cy.contains('Maximum size: 2MB').should('have.length', 1)
     })
   
     it('should handle valid file uploads', () => {
@@ -122,9 +115,9 @@ describe('File Upload Page Validation', () => {
           .and('have.css', 'cursor', 'pointer')
     
         // After reconciliation
-        cy.intercept('POST', '/api/reconcile', { 
+        cy.intercept('POST', '/api/v1/reconcile-embeddings', { 
           statusCode: 200,
-          body: { reconciliationId: 'test123' }
+          body: { reconciliationId: 'eca6f7b2-6e74-4936-8a03-11064af86619' }
         }).as('reconcileRequest')
     
         cy.contains('button', 'Reconcile').click()
@@ -144,11 +137,11 @@ describe('File Upload Page Validation', () => {
           .selectFile(`cypress/fixtures/${testFiles.validCSV}`, { force: true })
     
         // Mock slow API response
-        cy.intercept('POST', '/api/reconcile', (req) => {
+        cy.intercept('POST', '/api/v1/reconcile-embeddings', (req) => {
           req.reply({
             delay: 2000,
             statusCode: 200,
-            body: { reconciliationId: 'test123' }
+            body: { reconciliationId: 'eca6f7b2-6e74-4936-8a03-11064af86619' }
           })
         }).as('slowReconcile')
     

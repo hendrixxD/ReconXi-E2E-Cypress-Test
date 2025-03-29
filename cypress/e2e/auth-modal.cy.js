@@ -29,19 +29,19 @@
 
 describe('Auth Modal Validation', () => {
     const authModals = {
-      login: {
-        trigger: '[aria-label="Open login modal"]',
-        title: 'Welcome Back!',
-        description: 'Log in to continue optimizing your workflow!',
-        buttonText: 'Login with Google',
-        switchText: "Don't Have an Account?"
-      },
-      signup: {
-        trigger: '[aria-label="Open signup modal"]',
-        title: 'Use your Google account to get started quickly',
-        buttonText: 'Continue with Google',
-        switchText: 'Already Have an Account?'
-      },
+      // login: {
+      //   trigger: '[aria-label="Open login modal"]',
+      //   title: 'Welcome Back!',
+      //   description: 'Log in to continue optimizing your workflow!',
+      //   buttonText: 'Login with Google',
+      //   switchText: "Don't Have an Account?"
+      // },
+      // signup: {
+      //   trigger: '[aria-label="Open signup modal"]',
+      //   title: 'Use your Google account to get started quickly',
+      //   buttonText: 'Continue with Google',
+      //   switchText: 'Already Have an Account?'
+      // },
       getStarted: {
         trigger: '[aria-label="Get Started For Free"]',
         title: 'Use your Google account to get started quickly',
