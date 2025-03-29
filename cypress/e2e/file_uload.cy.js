@@ -1,9 +1,10 @@
 // cypress/e2e/file-upload.cy.js
 describe('File Upload Page Validation', () => {
     const testFiles = {
-      validCSV: 'testFiles/valid.csv',
-      invalidTXT: 'testFiles/invalid.txt',
-      largeCSV: 'testFiles/large-file.csv' // 3MB file
+      validBankCSV: 'test-bank.csv',
+      validCompanyCSV: 'test-ledger.csv',
+      invalidTXT: 'invalid.txt',
+      largeCSV: 'large-file.csv' // 3MB file
     }
   
     beforeEach(() => {
@@ -49,13 +50,17 @@ describe('File Upload Page Validation', () => {
     })
   
     it('should handle valid file uploads', () => {
-      // Bank Statement upload
-      cy.get('[aria-label="Bank upload zone"] input[type="file"]')
-        .selectFile(`cypress/fixtures/${testFiles.validCSV}`, { force: true })
+      // // Bank Statement upload
+      // cy.get('[aria-label="Bank upload zone"] input[type="file"]')
+      //   .selectFile(`cypress/fixtures/${testFiles.validCSV}`, { force: true })
+      cy.contains('Upload Bank Statement')
+        .next() // gets the upload zone div following the h2
+        .find('input[type="file"]')
+        .selectFile(`cypress/fixtures/testFiles/${testFiles.validBankCSV}`, { force: true });
       
       // Company Ledger upload
       cy.get('[aria-label="Ledger upload zone"] input[type="file"]')
-        .selectFile(`cypress/fixtures/${testFiles.validCSV}`, { force: true })
+        .selectFile(`cypress/fixtures/testFiles/${testFiles.validCompanyCSV}`, { force: true })
   
       // Verify upload success
       cy.contains('.text-green-600', 'Upload successful').should('exist')
