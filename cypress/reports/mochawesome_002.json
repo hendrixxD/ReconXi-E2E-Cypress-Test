@@ -5,9 +5,9 @@
     "passes": 0,
     "pending": 0,
     "failures": 1,
-    "start": "2025-03-29T10:51:33.311Z",
-    "end": "2025-03-29T10:51:33.632Z",
-    "duration": 321,
+    "start": "2025-03-30T14:45:41.903Z",
+    "end": "2025-03-30T14:45:57.914Z",
+    "duration": 16011,
     "testsRegistered": 1,
     "passPercent": 0,
     "pendingPercent": 0,
@@ -18,41 +18,41 @@
   },
   "results": [
     {
-      "uuid": "a62fd099-3200-4b19-aa4a-bd0b8a0cddee",
+      "uuid": "0bafa4fa-a2eb-416b-87f0-470b24bbc311",
       "title": "",
-      "fullFile": "cypress/e2e/authentication.cy.js",
-      "file": "cypress/e2e/authentication.cy.js",
+      "fullFile": "cypress/e2e/Authentication/logout.cy.js",
+      "file": "cypress/e2e/Authentication/logout.cy.js",
       "beforeHooks": [],
       "afterHooks": [],
       "tests": [],
       "suites": [
         {
-          "uuid": "7bbde002-bb81-4cab-bba7-ff211e1e946c",
-          "title": "Authentication Flow",
+          "uuid": "f86ef66c-4176-4058-b5be-d1c14923294b",
+          "title": "Login and Logout Flow",
           "fullFile": "",
           "file": "",
           "beforeHooks": [],
           "afterHooks": [],
           "tests": [
             {
-              "title": "should login via Google using",
-              "fullTitle": "Authentication Flow should login via Google using",
+              "title": "should handle logout successfully",
+              "fullTitle": "Login and Logout Flow should handle logout successfully",
               "timedOut": null,
-              "duration": 283,
+              "duration": 15966,
               "state": "failed",
               "speed": null,
               "pass": false,
               "fail": true,
               "pending": false,
               "context": null,
-              "code": "// // Open specific auth modal\n// cy.get(selector).click()\n// Verify correct modal content\ncy.get('[role=\"dialog\"][data-state=\"open\"]').within(() => {\n  cy.contains('p', 'Use your Google account to get started quickly').should('be.visible');\n  cy.contains('button', 'Continue with Google').should('be.visible');\n  // if (flowType === 'login') {\n  //   cy.contains('h3', 'Welcome Back!').should('be.visible')\n  //   cy.contains('button', 'Login with Google').should('be.visible')\n  // } else {\n  //   cy.contains('p', 'Use your Google account to get started quickly').should('be.visible')\n  //   cy.contains('button', 'Continue with Google').should('be.visible')\n  // }\n});\n// Complete login\ncy.googleLogin();\ncy.url().should('include', '/dashboard');\ncy.get('[aria-label=\"User menu\"]').should('be.visible');",
+              "code": "// Open profile dropdown\ncy.get('[data-slot=\"dropdown-menu-trigger\"]').should('be.visible').click();\n// Wait for dropdown to animate in\ncy.get('[data-slot=\"dropdown-menu-content\"]').should('be.visible').wait(300).within(() => {\n  //Use the exact DOM hierarchy from your HTML\n  cy.get('button') // Target the parent button\n  .find('div.text-red-600') // Find the red text container\n  .should('contain', 'Log out').click({\n    force: true\n  });\n});\n// Verify logout confirmation\ncy.get('[role=\"alert\"]', {\n  timeout: 10000\n}).should('be.visible').and('contain.text', 'Log out successfully');",
               "err": {
-                "message": "TypeError: cy.googleLogin is not a function\n\nThis error occurred while creating the session. Because the session setup failed, we failed the test.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Authentication Flow`",
-                "estack": "TypeError: cy.googleLogin is not a function\n\nThis error occurred while creating the session. Because the session setup failed, we failed the test.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Authentication Flow`\n    at Object.eval [as setup] (webpack://cypress-tests/./cypress/e2e/authentication.cy.js:11:9)\n    at Context.<anonymous> (https://reconxi.com/__cypress/runner/cypress_runner.js:134964:38)\n    at getRet (https://reconxi.com/__cypress/runner/cypress_runner.js:119371:20)\n    at tryCatcher (https://reconxi.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (https://reconxi.com/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.thenFn (https://reconxi.com/__cypress/runner/cypress_runner.js:119382:66)\n    at Context.then (https://reconxi.com/__cypress/runner/cypress_runner.js:119633:21)\n    at wrapped (https://reconxi.com/__cypress/runner/cypress_runner.js:139910:19)\n    at <unknown> (https://reconxi.com/__cypress/runner/cypress_runner.js:145855:15)",
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `div.text-red-600`, but never found it. Queried from:\n\n              > cy.get(button)",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `div.text-red-600`, but never found it. Queried from:\n\n              > cy.get(button)\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/Authentication/logout.cy.js:98:9)\n    at withinFn (https://reconxi.com/__cypress/runner/cypress_runner.js:134284:8)\n    at <unknown> (https://reconxi.com/__cypress/runner/cypress_runner.js:134365:16)\n    at __WEBPACK_DEFAULT_EXPORT__ (https://reconxi.com/__cypress/runner/cypress_runner.js:132223:10)\n    at Context.within (https://reconxi.com/__cypress/runner/cypress_runner.js:134351:67)\n    at wrapped (https://reconxi.com/__cypress/runner/cypress_runner.js:139910:19)",
                 "diff": null
               },
-              "uuid": "dd0ee355-3b3e-49d1-bef1-f358c71017e3",
-              "parentUUID": "7bbde002-bb81-4cab-bba7-ff211e1e946c",
+              "uuid": "2e0c163b-86a5-4006-9aa2-4e2916253676",
+              "parentUUID": "f86ef66c-4176-4058-b5be-d1c14923294b",
               "isHook": false,
               "skipped": false
             }
@@ -60,11 +60,11 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "dd0ee355-3b3e-49d1-bef1-f358c71017e3"
+            "2e0c163b-86a5-4006-9aa2-4e2916253676"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 283,
+          "duration": 15966,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -88,7 +88,7 @@
       "options": {
         "quiet": false,
         "reportFilename": "mochawesome",
-        "saveHtml": true,
+        "saveHtml": false,
         "saveJson": true,
         "consoleReporter": "spec",
         "useInlineDiffs": false,
@@ -100,7 +100,7 @@
       "options": {
         "reportDir": "cypress/reports",
         "overwrite": false,
-        "html": true,
+        "html": false,
         "json": true
       },
       "version": "6.2.0"

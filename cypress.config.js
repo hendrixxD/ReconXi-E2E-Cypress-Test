@@ -23,9 +23,9 @@ module.exports = defineConfig({
       password: process.env.password_
     },
     reporterOptions: {
-      reportDir: 'cypress/reconxi-report',
+      reportDir: 'cypress/reports',
       overwrite: false,
-      html: true,
+      html: false,
       json: true,
     },
     setupNodeEvents(on, config) {

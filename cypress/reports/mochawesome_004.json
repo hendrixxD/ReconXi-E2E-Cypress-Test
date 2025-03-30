@@ -2,14 +2,14 @@
   "stats": {
     "suites": 1,
     "tests": 1,
-    "passes": 0,
+    "passes": 1,
     "pending": 0,
-    "failures": 1,
-    "start": "2025-03-29T10:53:03.268Z",
-    "end": "2025-03-29T10:53:09.277Z",
-    "duration": 6009,
+    "failures": 0,
+    "start": "2025-03-30T14:46:12.269Z",
+    "end": "2025-03-30T14:46:20.148Z",
+    "duration": 7879,
     "testsRegistered": 1,
-    "passPercent": 0,
+    "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -18,53 +18,49 @@
   },
   "results": [
     {
-      "uuid": "54ce1051-3f78-4c55-99d4-288c386c076a",
+      "uuid": "083196a4-e5a5-4041-b2a2-4013928b1894",
       "title": "",
-      "fullFile": "cypress/e2e/logout.cy.js",
-      "file": "cypress/e2e/logout.cy.js",
+      "fullFile": "cypress/e2e/Authentication/real-login.cy.js",
+      "file": "cypress/e2e/Authentication/real-login.cy.js",
       "beforeHooks": [],
       "afterHooks": [],
       "tests": [],
       "suites": [
         {
-          "uuid": "2ce05973-8db7-4a63-ad9d-32886af30961",
-          "title": "Login and Logout Flow",
+          "uuid": "bff767d0-d083-4024-bf20-f0208c699a06",
+          "title": "real google authentication",
           "fullFile": "",
           "file": "",
           "beforeHooks": [],
           "afterHooks": [],
           "tests": [
             {
-              "title": "should handle logout successfully",
-              "fullTitle": "Login and Logout Flow should handle logout successfully",
+              "title": "shows dashboard",
+              "fullTitle": "real google authentication shows dashboard",
               "timedOut": null,
-              "duration": 5945,
-              "state": "failed",
-              "speed": null,
-              "pass": false,
-              "fail": true,
+              "duration": 7651,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
               "pending": false,
               "context": null,
-              "code": "cy.visit('/dashboard');\n// Use custom logout command\ncy.logout().then(() => {\n  // Verify logout feedback\n  cy.get('[role=\"alert\"]', {\n    timeout: 5000\n  }).should('be.visible').and('contain.text', 'Log out successfully');\n  // Verify auth buttons reappear\n  cy.get(authButtons.getStarted).should('be.visible');\n  cy.get(authButtons.login).should('be.visible');\n  cy.get(authButtons.signup).should('be.visible');\n});",
-              "err": {
-                "message": "TypeError: cy.logout is not a function",
-                "estack": "TypeError: cy.logout is not a function\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/logout.cy.js:10:9)\n    at runnable.fn (https://reconxi.com/__cypress/runner/cypress_runner.js:140177:19)\n    at callFn (https://reconxi.com/__cypress/runner/cypress_runner.js:158777:21)\n    at Runnable.run (https://reconxi.com/__cypress/runner/cypress_runner.js:158764:7)\n    at <unknown> (https://reconxi.com/__cypress/runner/cypress_runner.js:164697:30)\n    at PassThroughHandlerContext.finallyHandler (https://reconxi.com/__cypress/runner/cypress_runner.js:4042:23)\n    at PassThroughHandlerContext.tryCatcher (https://reconxi.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://reconxi.com/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://reconxi.com/__cypress/runner/cypress_runner.js:1546:18)",
-                "diff": null
-              },
-              "uuid": "53c47841-60c0-4943-b64a-0932a430c37b",
-              "parentUUID": "2ce05973-8db7-4a63-ad9d-32886af30961",
+              "code": "// cy.contains('Get Started').should('be.visible')\ncy.visit('/dashboard');",
+              "err": {},
+              "uuid": "4e6aed63-0c6b-4055-9475-5104e73dc76a",
+              "parentUUID": "bff767d0-d083-4024-bf20-f0208c699a06",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
-          "passes": [],
-          "failures": [
-            "53c47841-60c0-4943-b64a-0932a430c37b"
+          "passes": [
+            "4e6aed63-0c6b-4055-9475-5104e73dc76a"
           ],
+          "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 5945,
+          "duration": 7651,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -88,7 +84,7 @@
       "options": {
         "quiet": false,
         "reportFilename": "mochawesome",
-        "saveHtml": true,
+        "saveHtml": false,
         "saveJson": true,
         "consoleReporter": "spec",
         "useInlineDiffs": false,
@@ -100,7 +96,7 @@
       "options": {
         "reportDir": "cypress/reports",
         "overwrite": false,
-        "html": true,
+        "html": false,
         "json": true
       },
       "version": "6.2.0"
