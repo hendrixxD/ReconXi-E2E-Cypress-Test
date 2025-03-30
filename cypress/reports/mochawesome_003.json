@@ -1,0 +1,244 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 7,
+    "passes": 1,
+    "pending": 0,
+    "failures": 6,
+    "start": "2025-03-29T10:51:36.450Z",
+    "end": "2025-03-29T10:53:00.722Z",
+    "duration": 84272,
+    "testsRegistered": 7,
+    "passPercent": 14.285714285714285,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c18b0656-41fe-441f-9807-957030b914b0",
+      "title": "",
+      "fullFile": "cypress/e2e/file_uload.cy.js",
+      "file": "cypress/e2e/file_uload.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6ccc0872-9dd6-4965-9b27-edfa90ba565a",
+          "title": "File Upload Page Validation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should validate UI implementation",
+              "fullTitle": "File Upload Page Validation should validate UI implementation",
+              "timedOut": null,
+              "duration": 8453,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Verify main page elements\ncy.contains('h2', 'Upload Bank Statement').should('be.visible');\ncy.contains('h2', 'Upload Company Ledger').should('be.visible');\n// Bank Statement Section\ncy.get('div[role=\"presentation\"]').should('contain.text', 'Choose file').and('have.css', 'border-color', 'rgba(51, 51, 51, 0.5)');\n// Company Ledger Section\ncy.contains('Upload Company Ledger').parent() // gets the parent container\n.find('div[role=\"presentation\"]').should('contain.text', 'Choose file').and('have.css', 'border-color', 'rgba(51, 51, 51, 0.5)');\n// Format requirements\ncy.contains('Supported format: CSV').should('have.length', 1);\ncy.contains('Maximum size: 2MB').should('have.length', 1);",
+              "err": {},
+              "uuid": "65b383a9-c3ef-406f-81d8-328a95db983f",
+              "parentUUID": "6ccc0872-9dd6-4965-9b27-edfa90ba565a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should handle valid file uploads",
+              "fullTitle": "File Upload Page Validation should handle valid file uploads",
+              "timedOut": null,
+              "duration": 12278,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// // Bank Statement upload\n// cy.get('[aria-label=\"Bank upload zone\"] input[type=\"file\"]')\n//   .selectFile(`cypress/fixtures/${testFiles.validCSV}`, { force: true })\ncy.contains('Upload Bank Statement').next() // gets the upload zone div following the h2\n.find('input[type=\"file\"]').selectFile(`cypress/fixtures/testFiles/${testFiles.validBankCSV}`, {\n  force: true\n});\n// Company Ledger upload\ncy.get('[aria-label=\"Ledger upload zone\"] input[type=\"file\"]').selectFile(`cypress/fixtures/testFiles/${testFiles.validCompanyCSV}`, {\n  force: true\n});\n// Verify upload success\ncy.contains('.text-green-600', 'Upload successful').should('exist');\ncy.get('[data-testid=\"reconcile-button\"]').should('be.enabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Ledger upload zone\"] input[type=\"file\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Ledger upload zone\"] input[type=\"file\"]`, but never found it.\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/file_uload.cy.js:62:9)",
+                "diff": null
+              },
+              "uuid": "09655fac-4483-4588-9c12-fe5eb0572343",
+              "parentUUID": "6ccc0872-9dd6-4965-9b27-edfa90ba565a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should handle invalid file types",
+              "fullTitle": "File Upload Page Validation should handle invalid file types",
+              "timedOut": null,
+              "duration": 14260,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('[aria-label=\"Bank upload zone\"] input[type=\"file\"]').selectFile(`cypress/fixtures/${testFiles.invalidTXT}`, {\n  force: true\n});\ncy.contains('.text-red-600', 'Invalid file type').should('exist');\ncy.get('[data-testid=\"reconcile-button\"]').should('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Bank upload zone\"] input[type=\"file\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Bank upload zone\"] input[type=\"file\"]`, but never found it.\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/file_uload.cy.js:71:9)",
+                "diff": null
+              },
+              "uuid": "a697c095-22a7-4c4b-b6b1-770df6744ca7",
+              "parentUUID": "6ccc0872-9dd6-4965-9b27-edfa90ba565a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should handle large file uploads",
+              "fullTitle": "File Upload Page Validation should handle large file uploads",
+              "timedOut": null,
+              "duration": 13312,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('[aria-label=\"Bank upload zone\"] input[type=\"file\"]').selectFile(`cypress/fixtures/${testFiles.largeCSV}`, {\n  force: true\n});\ncy.contains('.text-red-600', 'File size exceeds 2MB').should('exist');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Bank upload zone\"] input[type=\"file\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Bank upload zone\"] input[type=\"file\"]`, but never found it.\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/file_uload.cy.js:79:9)",
+                "diff": null
+              },
+              "uuid": "67cc6071-739e-46a6-8700-4ef8c8a91e64",
+              "parentUUID": "6ccc0872-9dd6-4965-9b27-edfa90ba565a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should maintain button state until both files are uploaded",
+              "fullTitle": "File Upload Page Validation should maintain button state until both files are uploaded",
+              "timedOut": null,
+              "duration": 11070,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Upload only Bank Statement\ncy.get('[aria-label=\"Bank upload zone\"] input[type=\"file\"]').selectFile(`cypress/fixtures/${testFiles.validCSV}`, {\n  force: true\n});\ncy.get('[data-testid=\"reconcile-button\"]').should('be.disabled');\n// Upload Company Ledger\ncy.get('[aria-label=\"Ledger upload zone\"] input[type=\"file\"]').selectFile(`cypress/fixtures/${testFiles.validCSV}`, {\n  force: true\n});\ncy.get('[data-testid=\"reconcile-button\"]').should('be.enabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Bank upload zone\"] input[type=\"file\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Bank upload zone\"] input[type=\"file\"]`, but never found it.\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/file_uload.cy.js:87:9)",
+                "diff": null
+              },
+              "uuid": "7d5c4356-746c-417b-b30d-3ca5af696a86",
+              "parentUUID": "6ccc0872-9dd6-4965-9b27-edfa90ba565a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should validate Reconcile button states",
+              "fullTitle": "File Upload Page Validation should validate Reconcile button states",
+              "timedOut": null,
+              "duration": 11036,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Initial state - disabled\ncy.contains('button', 'Reconcile').should('be.visible').and('have.attr', 'disabled').and('have.css', 'background-color', 'rgba(46, 96, 74, 0.5)'); // Disabled opacity\n// Upload one valid file\ncy.get('[aria-label=\"Bank upload zone\"] input[type=\"file\"]').selectFile(`cypress/fixtures/${testFiles.validCSV}`, {\n  force: true\n});\ncy.contains('button', 'Reconcile').should('have.attr', 'disabled').and('have.css', 'background-color', 'rgba(46, 96, 74, 0.5)');\n// Upload second valid file\ncy.get('[aria-label=\"Ledger upload zone\"] input[type=\"file\"]').selectFile(`cypress/fixtures/${testFiles.validCSV}`, {\n  force: true\n});\n// Enabled state\ncy.contains('button', 'Reconcile').should('not.have.attr', 'disabled').and('have.css', 'background-color', 'rgb(46, 96, 74)') // Full opacity\n.and('have.css', 'cursor', 'pointer');\n// After reconciliation\ncy.intercept('POST', '/api/v1/reconcile-embeddings', {\n  statusCode: 200,\n  body: {\n    reconciliationId: 'eca6f7b2-6e74-4936-8a03-11064af86619'\n  }\n}).as('reconcileRequest');\ncy.contains('button', 'Reconcile').click();\ncy.wait('@reconcileRequest');\n// Verify button resets to disabled\ncy.contains('button', 'Reconcile').should('have.attr', 'disabled').and('have.css', 'background-color', 'rgba(46, 96, 74, 0.5)');",
+              "err": {
+                "message": "CypressError: Timed out retrying after 4000ms: You attempted to make a chai-jQuery assertion on an object that is neither a DOM object or a jQuery object.\n\nThe chai-jQuery assertion you used was:\n\n  > css\n\nThe invalid subject you asserted on was:\n\n  > disabled\n\nTo use chai-jQuery assertions your subject must be valid.\n\nThis can sometimes happen if a previous assertion changed the subject.",
+                "estack": "CypressError: Timed out retrying after 4000ms: You attempted to make a chai-jQuery assertion on an object that is neither a DOM object or a jQuery object.\n\nThe chai-jQuery assertion you used was:\n\n  > css\n\nThe invalid subject you asserted on was:\n\n  > disabled\n\nTo use chai-jQuery assertions your subject must be valid.\n\nThis can sometimes happen if a previous assertion changed the subject.\n    at Object.onInvalid (https://reconxi.com/__cypress/runner/cypress_runner.js:140587:68)\n    at assertDom (https://reconxi.com/__cypress/runner/cypress_runner.js:141262:26)\n    at Proxy.<anonymous> (https://reconxi.com/__cypress/runner/cypress_runner.js:141367:7)\n    at Proxy.methodWrapper (https://reconxi.com/__cypress/runner/cypress_runner.js:78779:25)\n    at applyChainer (https://reconxi.com/__cypress/runner/cypress_runner.js:118880:26)\n    at <unknown> (https://reconxi.com/__cypress/runner/cypress_runner.js:118933:16)\n    at arrayReduce (https://reconxi.com/__cypress/runner/cypress_runner.js:18675:21)\n    at Function.reduce (https://reconxi.com/__cypress/runner/cypress_runner.js:27727:14)\n    at applyChainers (https://reconxi.com/__cypress/runner/cypress_runner.js:118911:68)\n    at tryCatcher (https://reconxi.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (https://reconxi.com/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.shouldFn (https://reconxi.com/__cypress/runner/cypress_runner.js:118937:66)\n    at Context.and (https://reconxi.com/__cypress/runner/cypress_runner.js:118959:23)\n    at <unknown> (https://reconxi.com/__cypress/runner/cypress_runner.js:144836:39)\n    at assertions (https://reconxi.com/__cypress/runner/cypress_runner.js:145084:16)\n    at tryCatcher (https://reconxi.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Object.gotValue (https://reconxi.com/__cypress/runner/cypress_runner.js:6448:18)\n    at Object.gotAccum (https://reconxi.com/__cypress/runner/cypress_runner.js:6435:25)\n    at Object.tryCatcher (https://reconxi.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://reconxi.com/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://reconxi.com/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (https://reconxi.com/__cypress/runner/cypress_runner.js:1591:10)\nFrom Your Spec Code:\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/file_uload.cy.js:102:11)",
+                "diff": null
+              },
+              "uuid": "d4ca99e7-bac6-471e-97dd-8ddd1d1aa38b",
+              "parentUUID": "6ccc0872-9dd6-4965-9b27-edfa90ba565a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should show loading state during reconciliation",
+              "fullTitle": "File Upload Page Validation should show loading state during reconciliation",
+              "timedOut": null,
+              "duration": 13427,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Upload valid files\ncy.get('[aria-label=\"Bank upload zone\"] input[type=\"file\"]').selectFile(`cypress/fixtures/${testFiles.validCSV}`, {\n  force: true\n});\ncy.get('[aria-label=\"Ledger upload zone\"] input[type=\"file\"]').selectFile(`cypress/fixtures/${testFiles.validCSV}`, {\n  force: true\n});\n// Mock slow API response\ncy.intercept('POST', '/api/v1/reconcile-embeddings', req => {\n  req.reply({\n    delay: 2000,\n    statusCode: 200,\n    body: {\n      reconciliationId: 'eca6f7b2-6e74-4936-8a03-11064af86619'\n    }\n  });\n}).as('slowReconcile');\ncy.contains('button', 'Reconcile').click();\n// Verify loading state\ncy.contains('button', 'Reconcile').should('have.attr', 'disabled').and('contain', 'Processing...').and('have.css', 'cursor', 'not-allowed');\ncy.wait('@slowReconcile');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Bank upload zone\"] input[type=\"file\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[aria-label=\"Bank upload zone\"] input[type=\"file\"]`, but never found it.\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/file_uload.cy.js:139:11)",
+                "diff": null
+              },
+              "uuid": "6a85836a-a73d-4640-be8c-393240b236f9",
+              "parentUUID": "6ccc0872-9dd6-4965-9b27-edfa90ba565a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "65b383a9-c3ef-406f-81d8-328a95db983f"
+          ],
+          "failures": [
+            "09655fac-4483-4588-9c12-fe5eb0572343",
+            "a697c095-22a7-4c4b-b6b1-770df6744ca7",
+            "67cc6071-739e-46a6-8700-4ef8c8a91e64",
+            "7d5c4356-746c-417b-b30d-3ca5af696a86",
+            "d4ca99e7-bac6-471e-97dd-8ddd1d1aa38b",
+            "6a85836a-a73d-4640-be8c-393240b236f9"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 83836,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

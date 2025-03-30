@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-30T13:19:10.920Z",
+    "end": "2025-03-30T13:19:17.394Z",
+    "duration": 6474,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f3906444-e03b-47aa-8b52-fd74e2a0d734",
+      "title": "",
+      "fullFile": "cypress/e2e/testing-cypress-with-home.cy.js",
+      "file": "cypress/e2e/testing-cypress-with-home.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d699d09e-9323-4e88-a0b7-2ccf7c6224a2",
+          "title": "Homepage Test",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Visits the homepage and checks the title",
+              "fullTitle": "Homepage Test Visits the homepage and checks the title",
+              "timedOut": null,
+              "duration": 6281,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/');\ncy.title().should('include', 'ReconXi - AI-Powered Financial Reconciliation');",
+              "err": {},
+              "uuid": "0ba873a9-6c34-4102-a60f-3abf1713cc00",
+              "parentUUID": "d699d09e-9323-4e88-a0b7-2ccf7c6224a2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0ba873a9-6c34-4102-a60f-3abf1713cc00"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6281,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reconxi-report",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

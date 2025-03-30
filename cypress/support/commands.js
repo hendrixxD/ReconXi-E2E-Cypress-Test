@@ -83,12 +83,16 @@ Cypress.Commands.add('loginByGoogleApi', () => {
   })
 })
 */
+
+require('dotenv').config();
+
+// Mock User
 Cypress.Commands.add('login', (user = {}) => {
   const baseUrl = Cypress.config().baseUrl || 'http://localhost:3000';
   
   // Default test user
   const testUser = {
-    name: 'Test User',
+    name: 'Lenge Joshua',
     email: 'test@example.com',
     image: 'https://example.com/avatar.jpg',
     ...user
@@ -121,13 +125,16 @@ Cypress.Commands.add('login', (user = {}) => {
   cy.visit('/');
 });
 
+/**
+ * Real Login
+ */
 Cypress.Commands.add('loginEndpoint', (user = {}) => {
   const baseUrl = Cypress.config().baseUrl || 'http://localhost:3000';
   
   // Default test user
   const testUser = {
-    email: "j.doe@example.com",
-    password: "password123",
+    email: "jlenge65@gmail.com", //Cypress.env('email')
+    password: "devhendrixx@gmail.com" // Cypress.env('password'),
   };
 
   cy.request({
@@ -217,4 +224,42 @@ Cypress.Commands.add('loginWithRealGoogle', () => {
       });
     cy.getCookie('next-auth.session-token').should('exist');
   });
+});
+
+// Cypress.Commands.add('LogOut', () => {
+//   cy.getCookie('next-auth.session-token')
+//     .should('exist')
+//     .then((cookie) => {
+//       // Use the cookie value as your token (prepend "Bearer " if needed)
+//       const sessionToken = cookie.value;
+//       const authHeader = sessionToken.startsWith('Bearer ')
+//         ? sessionToken
+//         : `Bearer ${sessionToken}`;
+
+//       // Use the session token in the API request to get the user details
+//       cy.request({
+//         method: 'POST',
+//         url: 'https://api-dev.reconxi.com/api/v1/auth/logout',
+//         headers: {
+//           Authorization: authHeader,
+//         }
+
+//       })
+//     });
+// });
+
+// cypress/support/commands.js
+Cypress.Commands.add('logout', () => {
+  // Click the profile icon dropdown trigger
+  cy.get('[data-slot="dropdown-menu-trigger"]')
+    .should('be.visible')
+    .first()
+    .click();
+
+  // Wait for the dropdown menu to be visible and then click "Log out"
+  cy.get('[role="menu"]', { timeout: 5000 })
+    .should('be.visible')
+    .within(() => {
+      cy.contains('Log out').click();
+    });
 });

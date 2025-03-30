@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-03-30T13:19:22.685Z",
+    "end": "2025-03-30T13:19:40.047Z",
+    "duration": 17362,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c031dad3-63f1-41b3-8273-a1f7aacce90a",
+      "title": "",
+      "fullFile": "cypress/e2e/Authentication/logout.cy.js",
+      "file": "cypress/e2e/Authentication/logout.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a3e99441-ce2c-483f-9fa5-dc1f340294c4",
+          "title": "Login and Logout Flow",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should handle logout successfully",
+              "fullTitle": "Login and Logout Flow should handle logout successfully",
+              "timedOut": null,
+              "duration": 17210,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Open profile dropdown\ncy.get('[data-slot=\"dropdown-menu-trigger\"]').should('be.visible').click();\n// Wait for dropdown to animate in\ncy.get('[data-slot=\"dropdown-menu-content\"]').should('be.visible').wait(300).within(() => {\n  //Use the exact DOM hierarchy from your HTML\n  cy.get('button') // Target the parent button\n  .find('div.text-red-600') // Find the red text container\n  .should('contain', 'Log out').click({\n    force: true\n  });\n});\n// Verify logout confirmation\ncy.get('[role=\"alert\"]', {\n  timeout: 10000\n}).should('be.visible').and('contain.text', 'Log out successfully');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `div.text-red-600`, but never found it. Queried from:\n\n              > cy.get(button)",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `div.text-red-600`, but never found it. Queried from:\n\n              > cy.get(button)\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/Authentication/logout.cy.js:98:9)\n    at withinFn (https://reconxi.com/__cypress/runner/cypress_runner.js:134284:8)\n    at <unknown> (https://reconxi.com/__cypress/runner/cypress_runner.js:134365:16)\n    at __WEBPACK_DEFAULT_EXPORT__ (https://reconxi.com/__cypress/runner/cypress_runner.js:132223:10)\n    at Context.within (https://reconxi.com/__cypress/runner/cypress_runner.js:134351:67)\n    at wrapped (https://reconxi.com/__cypress/runner/cypress_runner.js:139910:19)",
+                "diff": null
+              },
+              "uuid": "ac01b22d-17de-481e-84fb-8ed7f9e9ad91",
+              "parentUUID": "a3e99441-ce2c-483f-9fa5-dc1f340294c4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "ac01b22d-17de-481e-84fb-8ed7f9e9ad91"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 17210,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reconxi-report",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

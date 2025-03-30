@@ -1,7 +1,8 @@
 
+const { defineConfig } = require("cypress");
+
 require('dotenv').config()
 
-const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   reporter: 'mochawesome',
@@ -10,14 +11,19 @@ module.exports = defineConfig({
     baseUrl: 'https://reconxi.com',
     experimentalSessionAndOrigin: true,
     env: {
-      GOOGLE_USER: "GOOGLE_USER",
-      GOOGLE_PASSWORD: "GOOGLE_PASSWORD",
-      googleRefreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-      googleClientId: process.env.REACT_APP_GOOGLE_CLIENTID,
-      googleClientSecret: process.env.REACT_APP_GOOGLE_CLIENT_SECRET,
+      // GOOGLE_USER: "GOOGLE_USER",
+      // GOOGLE_PASSWORD: "GOOGLE_PASSWORD",
+      // googleRefreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+      // googleClientId: process.env.REACT_APP_GOOGLE_CLIENTID,
+      // googleClientSecret: process.env.REACT_APP_GOOGLE_CLIENT_SECRET,
+      email: process.env.EMAIL,
+      password: process.env.PASSWORD,
+
+      email: process.env.email_,
+      password: process.env.password_
     },
     reporterOptions: {
-      reportDir: 'cypress/reports',
+      reportDir: 'cypress/reconxi-report',
       overwrite: false,
       html: true,
       json: true,

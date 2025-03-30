@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-03-29T10:51:05.079Z",
+    "end": "2025-03-29T10:51:18.750Z",
+    "duration": 13671,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7ac75003-368f-41da-926e-8fd216ada78c",
+      "title": "",
+      "fullFile": "cypress/e2e/auth-modal.cy.js",
+      "file": "cypress/e2e/auth-modal.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2b914418-aa2c-4a6f-9a17-3231b55d08b3",
+          "title": "Auth Modal Validation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should validate all auth modal variants",
+              "fullTitle": "Auth Modal Validation should validate all auth modal variants",
+              "timedOut": null,
+              "duration": 13568,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://reconxi.com');\nObject.entries(authModals).forEach(([flowType, config]) => {\n  // Open modal\n  cy.get(config.trigger).click();\n  // Verify modal structure\n  cy.get('[role=\"dialog\"][data-state=\"open\"]', {\n    timeout: 90000\n  }).within(() => {\n    // Common elements\n    cy.contains('h2', 'ReconXi').should('be.visible');\n    cy.get('svg').should('have.length.at.least', 3); // X icon + logo + Google icon\n    // Flow-specific elements\n    if (flowType === 'login') {\n      cy.contains('h3', config.title).should('be.visible');\n    } else {\n      cy.contains('p', config.title).should('be.visible');\n    }\n    cy.contains('button', config.buttonText).should('be.visible');\n    // .and('have.attr', 'aria-label', 'Continue with Google')\n    cy.contains(config.switchText).should('be.visible');\n  });\n  // Close modal\n  cy.get('[role=\"dialog\"][data-state=\"open\"]').find('button[aria-label=\"Close authentication modal\"]')\n  //  .find('button:has(.lucide-x)')\n  .click();\n  //   \n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Use your Google account to get started quickly' within the element: <div#radix-:R5m2v9b:.data-[state=open]:animate-in.data-[state=closed]:animate-out.data-[state=closed]:fade-out-0.data-[state=open]:fade-in-0.data-[state=closed]:zoom-out-95.data-[state=open]:zoom-in-95.fixed.top-[50%].left-[50%].z-50.grid.max-w-[calc(100%-2rem)].translate-x-[-50%].translate-y-[-50%].gap-4.border.shadow-lg.duration-200.sm:max-w-lg.w-[90%].md:!max-w-[535px].h-auto.rounded-[12px].bg-white.p-0.border-none.mx-auto> and with the selector: 'p' but never did.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Use your Google account to get started quickly' within the element: <div#radix-:R5m2v9b:.data-[state=open]:animate-in.data-[state=closed]:animate-out.data-[state=closed]:fade-out-0.data-[state=open]:fade-in-0.data-[state=closed]:zoom-out-95.data-[state=open]:zoom-in-95.fixed.top-[50%].left-[50%].z-50.grid.max-w-[calc(100%-2rem)].translate-x-[-50%].translate-y-[-50%].gap-4.border.shadow-lg.duration-200.sm:max-w-lg.w-[90%].md:!max-w-[535px].h-auto.rounded-[12px].bg-white.p-0.border-none.mx-auto> and with the selector: 'p' but never did.\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/auth-modal.cy.js:70:43)\n    at withinFn (https://reconxi.com/__cypress/runner/cypress_runner.js:134284:8)\n    at <unknown> (https://reconxi.com/__cypress/runner/cypress_runner.js:134365:16)\n    at __WEBPACK_DEFAULT_EXPORT__ (https://reconxi.com/__cypress/runner/cypress_runner.js:132223:10)\n    at Context.within (https://reconxi.com/__cypress/runner/cypress_runner.js:134351:67)\n    at wrapped (https://reconxi.com/__cypress/runner/cypress_runner.js:139910:19)",
+                "diff": null
+              },
+              "uuid": "9b987818-3d1b-482b-9dc0-8e5aae0ae350",
+              "parentUUID": "2b914418-aa2c-4a6f-9a17-3231b55d08b3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "9b987818-3d1b-482b-9dc0-8e5aae0ae350"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 13568,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

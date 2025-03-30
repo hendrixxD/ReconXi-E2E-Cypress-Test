@@ -1,0 +1,129 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-03-29T10:53:22.943Z",
+    "end": "2025-03-29T10:53:23.307Z",
+    "duration": 364,
+    "testsRegistered": 2,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 1,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "dc89ad0a-4106-4242-a1a8-4a069ed02ce0",
+      "title": "",
+      "fullFile": "cypress/e2e/reconciliation.cy.js",
+      "file": "cypress/e2e/reconciliation.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a386b6bc-c730-4ed0-baba-f2fcd7990381",
+          "title": "File Upload & Reconciliation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should enable reconcile button only with valid files",
+              "fullTitle": "File Upload & Reconciliation should enable reconcile button only with valid files",
+              "timedOut": null,
+              "duration": 279,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Test invalid file types\ncy.get('[data-testid=\"bank-upload\"]').selectFile(`cypress/fixtures/${testFiles.invalidFile}`);\ncy.get('[data-testid=\"reconcile-button\"]').should('be.disabled');\n// Test valid files\ncy.get('[data-testid=\"bank-upload\"]').selectFile(`cypress/fixtures/${testFiles.validBank}`);\ncy.get('[data-testid=\"ledger-upload\"]').selectFile(`cypress/fixtures/${testFiles.validLedger}`);\ncy.get('[data-testid=\"reconcile-button\"]').should('be.enabled');",
+              "err": {
+                "message": "TypeError: cy.googleLogin is not a function\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `File Upload & Reconciliation`",
+                "estack": "TypeError: cy.googleLogin is not a function\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `File Upload & Reconciliation`\n    at Context.eval (webpack://cypress-tests/./cypress/e2e/reconciliation.cy.js:10:9)\n    at runnable.fn (https://reconxi.com/__cypress/runner/cypress_runner.js:140177:19)\n    at callFn (https://reconxi.com/__cypress/runner/cypress_runner.js:158777:21)\n    at Runnable.run (https://reconxi.com/__cypress/runner/cypress_runner.js:158764:7)\n    at <unknown> (https://reconxi.com/__cypress/runner/cypress_runner.js:164697:30)\n    at PassThroughHandlerContext.finallyHandler (https://reconxi.com/__cypress/runner/cypress_runner.js:4042:23)\n    at PassThroughHandlerContext.tryCatcher (https://reconxi.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://reconxi.com/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://reconxi.com/__cypress/runner/cypress_runner.js:1546:18)",
+                "diff": null
+              },
+              "uuid": "b597a045-8f34-4008-ac7b-d8229a8df990",
+              "parentUUID": "a386b6bc-c730-4ed0-baba-f2fcd7990381",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should complete reconciliation flow",
+              "fullTitle": "File Upload & Reconciliation should complete reconciliation flow",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Upload files\ncy.get('[data-testid=\"bank-upload\"]').selectFile(`cypress/fixtures/${testFiles.validBank}`);\ncy.get('[data-testid=\"ledger-upload\"]').selectFile(`cypress/fixtures/${testFiles.validLedger}`);\n// Mock reconciliation API\ncy.intercept('POST', '/api/reconcile', {\n  statusCode: 200,\n  body: {\n    reconciliationId: '222d684b-a4dc-4afb-bd86-2e75f7b48c3d',\n    status: 'pending'\n  }\n}).as('reconcileRequest');\ncy.get('[data-testid=\"reconcile-button\"]').click();\ncy.wait('@reconcileRequest');\n// Verify dashboard update\ncy.url().should('include', '/dashboard');\ncy.get('[data-testid=\"reconciliation-table\"] tr:first-child [data-testid=\"status\"]').should('contain', 'pending');\n// Mock completed reconciliation\ncy.intercept('GET', '/api/reconciliations*', {\n  statusCode: 200,\n  body: [{\n    id: '222d684b-a4dc-4afb-bd86-2e75f7b48c3d',\n    status: 'completed',\n    created_at: new Date().toISOString()\n  }]\n}).as('completedReconciliation');\ncy.reload();\ncy.get('[data-testid=\"reconciliation-table\"] tr:first-child [data-testid=\"status\"]').should('contain', 'completed');\n// Test view results\ncy.get('[data-testid=\"view-button\"]').first().click();\ncy.url().should('include', '/reconciliation/222d684b-a4dc-4afb-bd86-2e75f7b48c3d');\ncy.get('[data-testid=\"results-table\"]').should('be.visible');",
+              "err": {},
+              "uuid": "fa6ea107-eb98-42d1-b2d8-3bfb60ceffb1",
+              "parentUUID": "a386b6bc-c730-4ed0-baba-f2fcd7990381",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "b597a045-8f34-4008-ac7b-d8229a8df990"
+          ],
+          "pending": [],
+          "skipped": [
+            "fa6ea107-eb98-42d1-b2d8-3bfb60ceffb1"
+          ],
+          "duration": 279,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
