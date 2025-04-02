@@ -3,9 +3,9 @@ name: API Test Automation
 
 on:
   push:
-    branches: [ qa-test, dev ]
+    branches: [ main, testing ]
   pull_request:
-    branches: [ main, dev ]
+    branches: [ main, testing ]
 
 
 jobs:
