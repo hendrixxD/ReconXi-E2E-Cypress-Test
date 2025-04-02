@@ -31,7 +31,7 @@ jobs:
         run: |
           # Run Newman with JSON reporter for parsing results
           # -e ./postman/environments/test-environment.json \
-          newman run ./postman/collections/Reconxi_postman_collection.json --parallel 4 \
+          newman run ./postman/collections/Reconxi_postman_collection.json \
             --reporters cli,htmlextra,junit,json \
             --reporter-htmlextra-export ./newman/reports/htmlreport.html \
             --reporter-junit-export ./newman/reports/junitreport.xml \
