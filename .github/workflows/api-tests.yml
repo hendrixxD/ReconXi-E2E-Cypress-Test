@@ -36,7 +36,7 @@ jobs:
             --reporters cli,htmlextra,junit,json \
             --reporter-htmlextra-export ./newman/reports/htmlreport.html \
             --reporter-junit-export ./newman/reports/junitreport.xml \
-            --reporter-json-export ./newman/reports/jsonreport.json
+            --reporter-json-export ./newman/reports/jsonreport.json || true
           
           # Store the exit code
           echo "::set-output name=newman_exit_code::$?"
@@ -96,21 +96,21 @@ jobs:
             }
           '
       
-      # - name: Check Test Results
-      #   run: |
-      #     # First check if Newman ran successfully by examining reports directory
-      #     echo "Checking for report files..."
-      #     ls -la ./newman/reports/ || echo "Reports directory is empty or doesn't exist"
+      - name: Check Test Results
+        run: |
+          # First check if Newman ran successfully by examining reports directory
+          echo "Checking for report files..."
+          ls -la ./newman/reports/ || echo "Reports directory is empty or doesn't exist"
           
-      #     # Then check specifically for the JUnit report
-      #     if [ -f "./newman/reports/junitreport.xml" ]; then
-      #       echo "Test execution completed. JUnit report found."
-      #       cat ./newman/logs/api_logs.txt || echo "Log file not found"
-      #     else
-      #       echo "Test execution failed. JUnit report not found."
-      #       cat ./newman/logs/api_logs.txt || echo "Log file not found"
-      #       exit 1
-      #     fi
+          # Then check specifically for the JUnit report
+          if [ -f "./newman/reports/junitreport.xml" ]; then
+            echo "Test execution completed. JUnit report found."
+            cat ./newman/logs/api_logs.txt || echo "Log file not found"
+          else
+            echo "Test execution failed. JUnit report not found."
+            cat ./newman/logs/api_logs.txt || echo "Log file not found"
+            exit 1
+          fi
       
       - name: Upload Test Reports and Logs
         uses: actions/upload-artifact@v4
