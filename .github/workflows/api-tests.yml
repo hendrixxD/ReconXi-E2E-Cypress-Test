@@ -1,16 +1,16 @@
 
-name: API Test Automation
+name: CI/CD For Test Automation
 
 on:
   push:
-    branches: [ main, testing ]
+    branches: testing
   pull_request:
-    branches: [ main, testing ]
+    branches: main
 
 
 jobs:
   api-tests:
-    runs-on: ubuntu-latest
+    runs-on: reconcile
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,8 +30,8 @@ jobs:
       - name: Run API Tests with Newman
         run: |
           # Run Newman with JSON reporter for parsing results
-          newman run ./postman/collections/Reconxi.postman_collection.json \
-            # -e ./postman/environments/test-environment.json \
+          # -e ./postman/environments/test-environment.json \
+          newman run ./postman/collections/Reconxi_postman_collection.json --parallel 4 \
             --reporters cli,htmlextra,junit,json \
             --reporter-htmlextra-export ./newman/reports/htmlreport.html \
             --reporter-junit-export ./newman/reports/junitreport.xml \
