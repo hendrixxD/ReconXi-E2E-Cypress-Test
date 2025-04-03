@@ -21,7 +21,7 @@ jobs:
       
       - name: Install Newman and Newman Reporter HTML
         run: |
-          npm install -g newman newman-reporter-json newman-reporter-html newman-reporter-htmlextra newman-reporter-junit
+          npm install -g newman newman-reporter-json newman-reporter-html newman-reporter-htmlextra
       
       - name: Create Directories
         run: |
@@ -95,9 +95,7 @@ jobs:
               );
             }
           '
-      - name: List generated reports
-        run: ls -la ./newman/reports/
-        
+
       - name: Check Test Results
         run: |
           # First check if Newman ran successfully by examining reports directory
