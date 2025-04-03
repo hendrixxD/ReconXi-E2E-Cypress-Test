@@ -36,7 +36,7 @@ jobs:
             --reporters cli,htmlextra,junit,json \
             --reporter-htmlextra-export ./newman/reports/htmlreport.html \
             --reporter-junit-export ./newman/reports/junitreport.xml \
-            --reporter-json-export ./newman/reports/jsonreport.json || true
+            --reporter-json-export ./newman/reports/jsonreport.json
           
           # Store the exit code
           echo "::set-output name=newman_exit_code::$?"
@@ -95,7 +95,7 @@ jobs:
               );
             }
           '
-
+      
       - name: Check Test Results
         run: |
           # First check if Newman ran successfully by examining reports directory
